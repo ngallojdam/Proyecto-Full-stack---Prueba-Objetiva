@@ -49,12 +49,69 @@ exports.findAll = (req, res) => {       // Creamos el detalle del controlador pa
 
 // Find a single Animal with an id
 exports.findOne = (req, res) => {
-}
+    const id = req.params.id;
+
+    Animal.findByPk(id) // Usamos findByPk para buscar por ID
+        .then(data => {
+            if (!data) {
+                return res.status(404).send({
+                    message: `Cannot find Animal with id=${id}.`
+                });
+            }
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Animal with id=" + id
+            });
+        });
+};
 
 // Update a Animal by the id in the request
 exports.update = (req, res) => {
+    const id = req.params.id;
+
+    Animal.update(req.body, { where: { id: id } }) // Actualiza el animal según el ID
+        .then(num => {
+            if (num[0] === 1) {
+                res.send({
+                    message: "Animal was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Animal with id=${id}. Maybe Animal was not found or req.body is empty!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Animal with id=" + id
+            });
+        });
 };
 
-// Delete a Animal with the specified id in the request
+
+/// Delete a Animal with the specified id in the request
 exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    Animal.destroy({
+        where: { id: id }
+    })
+    .then(num => {
+        if (num === 1) {
+            res.send({
+                message: "Animal was deleted successfully!"
+            });
+        } else {
+            res.send({
+                message: `Cannot delete Animal with id=${id}. Maybe Animal was not found!`
+            });
+        }
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Could not delete Animal with id=" + id
+        });
+    });
 };

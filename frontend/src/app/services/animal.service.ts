@@ -22,7 +22,7 @@ export class AnimalService {
   }
   
   updateAnimal(id: number, animal: any): Observable<any> {
-    return this.httpClient.put<any>(`${this.endpoint}/${id}`, animal);
+    return this.httpClient.put(`${this.endpoint}/${id}`, animal);
   }
   
   deleteAnimal(id: number): Observable<any> {

@@ -13,12 +13,11 @@ import { IonInput } from '@ionic/angular';
 
 
 export class MyAnimalsPage implements OnInit, AfterViewInit {
+  @ViewChild('genderInput', { static: false }) genderInput!: IonInput;
+  animalForm: FormGroup;
   animals: any[] = [];
   isEditMode: boolean = false;
   currentAnimalId: number | null = null;
-
-  @ViewChild('genderInput', { static: false}) genderInput!: IonInput;
-  animalForm: FormGroup;
     
   constructor(private animalService : AnimalService, private fb: FormBuilder, private router:Router) { 
 
@@ -39,9 +38,14 @@ export class MyAnimalsPage implements OnInit, AfterViewInit {
   }
 
   loadAnimals() {
-    this.animalService.getAnimals().subscribe((data: any) => {
-      this.animals = data
-    });
+    this.animalService.getAnimals().subscribe(
+      (data: any[]) => {
+        this.animals = data;
+      },
+      error => {
+        console.error('Error loading animals:', error);
+      }
+    );
   }
 
   addAnimal() {
@@ -60,18 +64,32 @@ export class MyAnimalsPage implements OnInit, AfterViewInit {
       gender: animal.gender,
       race: animal.race,
     });
+    this.genderInput.setFocus();
   }
 
   updateAnimal() {
-    if (this.animalForm.valid && this.currentAnimalId) {
-      this.animalService.updateAnimal(this.currentAnimalId, this.animalForm.value).subscribe(() => {
+    if (this.currentAnimalId !== null) {
+      const updatedAnimal = {
+        ...this.animalForm.value,
+        id: this.currentAnimalId // Asegúrate de incluir el ID
+      };
+  
+      this.animalService.updateAnimal(this.currentAnimalId, updatedAnimal).subscribe(response => {
+        console.log('Animal updated successfully:', response);
         this.loadAnimals(); 
         this.animalForm.reset(); 
         this.isEditMode = false; 
         this.currentAnimalId = null; 
+      }, error => {
+        console.error('Error updating animal:', error);
       });
+    } else {
+      console.error('Cannot update animal: currentAnimalId is null');
     }
   }
+  
+  
+  
 
   deleteAnimal(id: number) {
     this.animalService.deleteAnimal(id).subscribe(() => {
