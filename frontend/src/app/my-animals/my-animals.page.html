@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>my-animals</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form [formGroup]="animalForm" (ngSubmit)="isEditMode ? updateAnimal() : addAnimal()">
+    <ion-item>
+      <ion-label position="floating">Gender</ion-label>
+      <ion-input #genderInput formControlName="gender" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Race</ion-label>
+      <ion-input formControlName="race" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit">
+      {{ isEditMode ? 'Update Animal' : 'Add Animal' }}
+    </ion-button>
+  </form>
+  
+  <ion-list>
+    <ion-item *ngFor="let animal of animals">  <!--añadimos la vista para mostrar la información del Array de animales-->
+      <ion-label>
+        <h1>{{animal.gender}}</h1>
+        <p>{{animal.race}}</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="editAnimal(animal)">Edit</ion-button>
+        <ion-button color="danger" (click)="deleteAnimal(animal.id)">Delete</ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-button (click)="goHome()">Return to main page</ion-button>
+
