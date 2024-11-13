@@ -2,7 +2,7 @@
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,20 +13,34 @@ export class AnimalService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAnimals(): Observable<any>{
+  getAnimals() {
     return this.httpClient.get<any>(this.endpoint);
   }
 
-  addAnimal(animal: any): Observable<any> {
+  addAnimal(animal: any) {
     return this.httpClient.post<any>(this.endpoint, animal);
   }
-  
-  updateAnimal(id: number, animal: any): Observable<any> {
+
+  updateAnimal(id: number, animal: any, photoBlob: Blob) {
+    const formData = new FormData();
+  formData.append('gender', animal.gender);
+  formData.append('race', animal.race);
+  if (photoBlob) {
+    formData.append('photo', photoBlob, 'animal-photo.jpg');
+  }
     return this.httpClient.put(`${this.endpoint}/${id}`, animal);
   }
-  
-  deleteAnimal(id: number): Observable<any> {
+
+  deleteAnimal(id: number) {
     return this.httpClient.delete<any>(`${this.endpoint}/${id}`);
   }
-  
+
+  createAnimal(animal: any, blob: any) {
+    let formData = new FormData();
+    formData.append("gender", animal.gender);
+    formData.append("race", animal.race);
+    formData.append("file", blob);
+
+    return this.httpClient.post(this.endpoint, formData);
+  }
 }

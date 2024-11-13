@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Daniela's animals
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,12 +9,54 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Apuntes</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card>  <!--Componente ion-card de Ionic-->
+
+    <ion-item> <!--El ion-item tiene tres slots o zonas: izquierda, centro y derecha-->
+      <ion-avatar slot="start"> <!--El ion-avatar está a la izquierda-->
+        <img src="../../assets/animallogo.jpg" alt="logo" /> 
+      </ion-avatar>
+      <ion-label><!--El ion-label está en el centro-->
+        <h1>Animals</h1>
+        <p>Oct 20, 2024</p>
+      </ion-label>
+      <ion-icon slot="end" name="thumbs-up"></ion-icon><!--Se coloca en la zona de la derecha al poner "end"-->
+    </ion-item>
+
+    <img src="../../assets/chihuahua.jpg" alt="chihuahua"><!--La imagen se coloca en la carpeta assets-->
+
+    <ion-card-header>
+      <ion-card-subtitle>Biblioteca de razas</ion-card-subtitle>
+      <ion-card-title>Chihuahua</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Son los perros más pequeños que hay, su cráneo tiene forma de manzana y el pelo es suave, fino y corto. 
+      Los colores van desde el beis al negro. Un adulto compacto y delicado suele medir entre 15 y 23 cm y pesar de 1,8 a 2,7 kg.
+    </ion-card-content>
+<!--Ahora colocamos el pie de la tarjeta. Usamos ion-footer y dentro ion-grid-->
+    <ion-footer>
+      <ion-grid> <!--Crea una fila (ion-row) que contiene 3 columnas(ion-col)-->
+        <ion-row>
+          <ion-col>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>6.5k Likes</div>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="text"></ion-icon>
+            <div class="wrap-text">56 Comentarios</div>
+          </ion-col>
+          <ion-col>
+            <ion-icon name="time"></ion-icon>
+            <div>Hace 2 horas</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-footer>
+
+  </ion-card>
+
 </ion-content>

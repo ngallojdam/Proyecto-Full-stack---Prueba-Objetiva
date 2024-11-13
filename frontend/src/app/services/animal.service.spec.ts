@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AnimalService } from './animal.service';
+
 
 describe('AnimalService', () => {
   let service: AnimalService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule
     service = TestBed.inject(AnimalService);
   });
 

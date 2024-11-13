@@ -5,6 +5,9 @@ module.exports = (sequelize, Sequelize) => {
         },
         race: {
             type: Sequelize.STRING      // Creamos el modelo
+        },
+        filename: {
+            type: Sequelize.STRING      // El nombre dle fichero es lo único que se guardará en la BBDD. Para ello incluimos el campo filename
         }
     });
 

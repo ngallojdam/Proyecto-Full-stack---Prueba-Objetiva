@@ -18,9 +18,17 @@ export class AnimalService {
   }
 
   // PUT: Actualizar un animal existente
-  updateAnimal(id: number, animal: Animal): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, animal);
+  updateAnimal(id: number, animal: any, photoBlob?: Blob) {
+    const formData = new FormData();
+    formData.append('animalData', JSON.stringify(animal));
+    if (photoBlob) {
+      formData.append('image', photoBlob);
+    }
+  
+    return this.httpClient.put(`${this.endpoint}/${id}`, formData);
   }
+  
+  
 
   // DELETE: Borrar un animal
   deleteAnimal(id: number): Observable<any> {

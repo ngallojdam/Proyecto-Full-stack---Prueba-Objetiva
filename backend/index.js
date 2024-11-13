@@ -1,10 +1,15 @@
 const express = require("express"); // importa la librería express
 const cors = require("cors"); // Devolviendo el permiso CORS desde la API
 
+var path = require('path'); // Se crea la carpeta backend/public/images y en el backend como carpeta publica 
+
 const app = express(); // empezamos a usar express usando la constante app
 
+// public directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 var corsOptions = {
-    origin: "http://localhost:8100"
+    origin: "*"
 };
 
 app.use(cors(corsOptions)); // Instalamos el paquete cors y editamos index.js para incluir el permiso para la URL del dominio de origen de nuestro servidor de desarrollo de Ionic

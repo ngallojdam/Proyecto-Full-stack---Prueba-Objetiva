@@ -2,11 +2,13 @@
 
 module.exports = app => {
     const animals = require("../controllers/animal.controller.js");
+    var upload = require('../multer/upload');
 
     var router = require("express").Router();
 
     // Create a new Animal
-    router.post("/", animals.create);
+    router.post("/", upload.single('file'), animals.create);    // upload.single('file') se ejecuta después de recibir la petición de post del 
+                                                                // frontend y antes de que el controlador cree un animal
 
     // Retrieve all Animals
     router.get("/", animals.findAll);

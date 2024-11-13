@@ -9,7 +9,6 @@ exports.create = (req, res) => {
         res.status(400).send({
             message: "Content can not be empty!"
         });
-        return;
     }
 
     // Create a Animal
@@ -17,20 +16,19 @@ exports.create = (req, res) => {
         gender: req.body.gender,
         race: req.body.race,
         createdAt: req.body.createdAt || new Date(),
-        updatedAt: req.body.updatedAt || new Date()
+        updatedAt: req.body.updatedAt || new Date(),
+        filename: req.file ? req.file.filename : ""     // Sólo se modifica esta línea es para guardar en la BBDD el nombre que tendrá el fichero 
+                                                        // de imagen subido
     };
 
     // Save Animal in the database
-    Animal.create(animal)
-        .then(data => {
+    Animal.create(animal).then(data => {
             res.send(data);
-        })
-        .catch(err => {
+        }).catch(err => {
             res.status(500).send({
-                message:
-                err.message || "Some error occurred while creating the animal."
+                message: err.message || "Some error occurred while creating the animal."
+            })
             });
-        });
 };
 
 // Retrieve all Animals from the database

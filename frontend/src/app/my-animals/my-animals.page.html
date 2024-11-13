@@ -23,6 +23,10 @@
   
   <ion-list>
     <ion-item *ngFor="let animal of animals">  <!--añadimos la vista para mostrar la información del Array de animales-->
+      <ion-avatar slot="start">
+        <img *ngIf="animal?.filename" src="http://localhost:8080/images/{{animal.filename}}" alt="image"/> <!-- En esta URl estamos indicando cual es la imagen
+                                                                                            que nos vamos a descargar-->
+      </ion-avatar>
       <ion-label>
         <h1>{{animal.gender}}</h1>
         <p>{{animal.race}}</p>
@@ -33,6 +37,14 @@
       </ion-buttons>
     </ion-item>
   </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">  <!-- Con este ion-fab vamos a permitir al usuario que vaya a la página add-animal 
+                                                              para crear un nuevo animal-->
+    <ion-fab-button (click)="addAnimal()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>  
+  </ion-fab>
+
 </ion-content>
 
 <ion-button (click)="goHome()">Return to main page</ion-button>

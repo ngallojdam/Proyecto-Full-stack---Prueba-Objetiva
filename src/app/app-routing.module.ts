@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'edit-animal',
+    loadChildren: () => import('./edit-animal/edit-animal.module').then( m => m.EditAnimalPageModule)
+  },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  
+  { path: 'edit-animal/:id', loadChildren: () => import('./edit-animal/edit-animal.module').then(m => m.EditAnimalPageModule) },
+
 ];
 
 @NgModule({
@@ -20,3 +28,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+  

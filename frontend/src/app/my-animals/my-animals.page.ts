@@ -28,8 +28,30 @@ export class MyAnimalsPage implements OnInit, AfterViewInit {
 }
 
   ngOnInit() {
-    this.loadAnimals();
+   // this.loadAnimals();
   }
+
+  ionViewDidEnter(){
+    this.getAllAnimals();
+  }
+
+  getAllAnimals() {
+    this.animalService.getAnimals().subscribe(animals=> {
+      console.log(animals);
+      this.animals = animals;
+    })
+  }
+
+  addAnimal(){
+    //if (this.animalForm.valid) {
+    //  this.animalService.addAnimal(this.animalForm.value).subscribe(() => {
+     //   this.loadAnimals(); 
+     //   this.animalForm.reset(); 
+      //});
+      this.router.navigateByUrl("/add-animal"); // ya podemos acceder a la página de add-animal
+    }
+
+   
 
   ngAfterViewInit() {
     setTimeout(() => {
@@ -48,14 +70,8 @@ export class MyAnimalsPage implements OnInit, AfterViewInit {
     );
   }
 
-  addAnimal() {
-    if (this.animalForm.valid) {
-      this.animalService.addAnimal(this.animalForm.value).subscribe(() => {
-        this.loadAnimals(); 
-        this.animalForm.reset(); 
-      });
-    }
-  }
+  
+//}
 
   editAnimal(animal: any) {
     this.isEditMode = true;
@@ -100,4 +116,6 @@ export class MyAnimalsPage implements OnInit, AfterViewInit {
   goHome() {
     this.router.navigate(['/home']);
   }
+
+  
 }

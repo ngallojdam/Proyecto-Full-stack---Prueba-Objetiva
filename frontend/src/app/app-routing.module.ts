@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'my-animals',
     loadChildren: () => import('./my-animals/my-animals.module').then( m => m.MyAnimalsPageModule)
   },
+  {
+    path: 'add-animal',
+    loadChildren: () => import('./add-animal/add-animal.module').then( m => m.AddAnimalPageModule)
+  },
 ];
 
 @NgModule({
