@@ -11,5 +11,13 @@ module.exports = (sequelize, Sequelize) => {
         }
     });
 
+    Animal.associate = function(models) {
+        Animal.belongsTo(models.user, {
+            onDelete: "CASCADE",
+            foreignKey: "userId",
+            as: "users",
+        })
+    }
+
     return Animal;
 }

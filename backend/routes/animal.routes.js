@@ -3,6 +3,7 @@
 module.exports = app => {
     const animals = require("../controllers/animal.controller.js");
     var upload = require('../multer/upload');
+    const auth = require("../controllers/auth.js");
 
     var router = require("express").Router();
 
