@@ -13,50 +13,54 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>  <!--Componente ion-card de Ionic-->
+  <!--Recorre cada animal en la lista y muestra su información-->
 
+  <ion-card *ngFor="let animal of animals">  <!--Componente ion-card de Ionic-->
     <ion-item> <!--El ion-item tiene tres slots o zonas: izquierda, centro y derecha-->
       <ion-avatar slot="start"> <!--El ion-avatar está a la izquierda-->
         <img src="../../assets/animallogo.jpg" alt="logo" /> 
       </ion-avatar>
-      <ion-label><!--El ion-label está en el centro-->
+      <ion-label> <!--El ion-label está en el centro-->
         <h1>Animals</h1>
         <p>Oct 20, 2024</p>
       </ion-label>
-      <ion-icon slot="end" name="thumbs-up"></ion-icon><!--Se coloca en la zona de la derecha al poner "end"-->
+      <ion-icon slot="end" name="thumbs-up"></ion-icon> <!--Se coloca en la zona de la derecha al poner "end"-->
     </ion-item>
 
-    <img src="../../assets/chihuahua.jpg" alt="chihuahua"><!--La imagen se coloca en la carpeta assets-->
+    <img src="animal.image" alt="animal.title"> <!--La imagen se coloca en la carpeta assets-->
 
     <ion-card-header>
-      <ion-card-subtitle>Biblioteca de razas</ion-card-subtitle>
-      <ion-card-title>Chihuahua</ion-card-title>
+      <ion-card-subtitle>{{ animal.subtitle }}</ion-card-subtitle>
+      <ion-card-title>{{ animal.title }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      Son los perros más pequeños que hay, su cráneo tiene forma de manzana y el pelo es suave, fino y corto. 
-      Los colores van desde el beis al negro. Un adulto compacto y delicado suele medir entre 15 y 23 cm y pesar de 1,8 a 2,7 kg.
+      {{ animal.description }}
     </ion-card-content>
+
+
 <!--Ahora colocamos el pie de la tarjeta. Usamos ion-footer y dentro ion-grid-->
     <ion-footer>
       <ion-grid> <!--Crea una fila (ion-row) que contiene 3 columnas(ion-col)-->
         <ion-row>
+          
           <ion-col>
             <ion-icon name="thumbs-up"></ion-icon>
-            <div>6.5k Likes</div>
+            <div>{{ animal.likes | number }}</div>
           </ion-col>
+          
           <ion-col>
             <ion-icon name="text"></ion-icon>
-            <div class="wrap-text">56 Comentarios</div>
+            <div class="wrap-text">{{ animal.comments }} Comentarios</div>
           </ion-col>
+          
           <ion-col>
             <ion-icon name="time"></ion-icon>
-            <div>Hace 2 horas</div>
+            <div>{{ animal.time }}</div>
           </ion-col>
+        
         </ion-row>
       </ion-grid>
     </ion-footer>
-
   </ion-card>
-
 </ion-content>
