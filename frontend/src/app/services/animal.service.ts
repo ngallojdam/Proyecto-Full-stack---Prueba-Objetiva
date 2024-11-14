@@ -21,7 +21,7 @@ export class AnimalService {
     return this.httpClient.post<any>(this.endpoint, animal);
   }
 
-  updateAnimal(id: number, animal: any, photoBlob: Blob) {
+  updateAnimal(id: number, animal: any, photoBlob?: Blob) {
     const formData = new FormData();
   formData.append('gender', animal.gender);
   formData.append('race', animal.race);

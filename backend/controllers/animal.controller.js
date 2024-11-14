@@ -1,5 +1,5 @@
 const db = require("../models");
-const Animal = db.animals;          // Creamos el controlador
+const Animal = db.animal;          // Creamos el controlador
 const Op = db.Sequelize.Op;
 
 // Create and Save a new Animal

@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'add-animal',
     loadChildren: () => import('./add-animal/add-animal.module').then( m => m.AddAnimalPageModule)
   },
+  {
+    path: 'labels',
+    loadChildren: () => import('./labels/labels.module').then( m => m.LabelsPageModule)
+  },
 ];
 
 @NgModule({

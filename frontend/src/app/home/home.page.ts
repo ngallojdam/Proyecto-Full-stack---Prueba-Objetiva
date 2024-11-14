@@ -19,4 +19,8 @@ export class HomePage {
     this.router.navigateByUrl("/my-animals");
   }
 
+  gotoLabels() {
+    this.router.navigateByUrl('/labels');
+  }
+
 }
