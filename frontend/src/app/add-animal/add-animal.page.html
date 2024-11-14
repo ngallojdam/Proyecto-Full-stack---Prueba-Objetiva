@@ -35,20 +35,20 @@
     </ion-row>
   </ion-grid>
 
-  <form [formGroup]="animalForm" (ngSubmit)="submitForm()" novalidate>
+  <form [formGroup]="animalForm" (ngSubmit)="submitForm()">
     <ion-item lines="full">
       <ion-label position="floating">Gender</ion-label>
       <ion-input formControlName="gender" type="text" required></ion-input>
     </ion-item>
-    <span class="error ion-padding" *ngIf="getFormControl('brand')?.hasError('required') && getFormControl('gender')?.touched">Gender required.</span>
+    <span class="error ion-padding" *ngIf="getFormControl('gender')?.hasError('required') && getFormControl('gender')?.touched">Gender required.</span>
     <ion-item lines="full">
       <ion-label position="floating">Race</ion-label>
       <ion-input formControlName="race" type="text" required></ion-input>
     </ion-item>
-    <span class="error ion-padding" *ngIf="getFormControl('model')?.hasError('required') && getFormControl('race')?.touched">Race is required.</span>
+    <span class="error ion-padding" *ngIf="getFormControl('race')?.hasError('required') && getFormControl('race')?.touched">Race is required.</span>
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" expand="block">Submit</ion-button>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="animalForm.invalid">Submit</ion-button>
       </ion-col>
     </ion-row>
   </form>  

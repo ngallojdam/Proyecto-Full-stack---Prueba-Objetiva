@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class AddAnimalPage implements OnInit {
 
-  animalForm!: FormGroup;  // Propiedad marcada como "definitivamente asignada"
+  animalForm!: FormGroup;
   isSubmitted: boolean = false;
   capturedPhoto: string = "";
 
@@ -29,8 +29,8 @@ export class AddAnimalPage implements OnInit {
     });
   }
 
-  getFormControl(field: string) {
-    return this.animalForm.get(field);
+  getFormControl(controlName: string) {
+    return this.animalForm.get(controlName);
   }
 
   ionViewWillEnter() {
@@ -69,32 +69,43 @@ export class AddAnimalPage implements OnInit {
     if (!this.animalForm.valid) {
       console.log('Please provide all the required values!');
       return;
-    } else {
-      let blob: Blob | null = null;
-      
-      // Si la foto está capturada, conviértela a un Blob
-      if (this.capturedPhoto) {
-        try {
-          const response = await fetch(this.capturedPhoto);
-          blob = await response.blob();
-        } catch (error) {
-          console.error('Error converting photo to blob:', error);
-        }
-      }
-
-      // Aseguramos que la variable blob no esté nula
-      const safeBlob = blob || new Blob();
-
-      // Llamar al servicio para crear el animal
-      this.animalService.createAnimal(this.animalForm.value, safeBlob).subscribe(
-        (data) => {
-          console.log("Animal created successfully!", data);
-          this.router.navigateByUrl("/my-animals"); // Redirige a la página de animales
-        },
-        (error) => {
-          console.error("Error creating animal:", error);
-        }
-      );
     }
+
+    let blob: Blob | null = null;
+
+    // Si la foto está capturada, conviértela a un Blob
+    if (this.capturedPhoto) {
+      try {
+        const response = await fetch(this.capturedPhoto);
+        blob = await response.blob();
+      } catch (error) {
+        console.error('Error converting photo to blob:', error);
+      }
+    }
+
+    const formData = new FormData();
+    formData.append('gender', this.animalForm.value.gender);
+    formData.append('race', this.animalForm.value.race);
+
+    // Si hay una foto capturada, se adjunta al FormData
+    if (blob) {
+      formData.append('photo', blob, 'photo.jpg');
+    }
+
+    // Imprimir contenido de FormData (opcional para depuración)
+    // formData.forEach((value, key) => {
+    //   console.log(`${key}:`, value);
+    // });
+
+    // Llamar al servicio para crear el animal
+    this.animalService.addAnimal(formData).subscribe(
+      (data) => {
+        console.log("Animal created successfully!", data);
+        this.router.navigateByUrl("/my-animals"); // Redirige a la página de animales
+      },
+      (error) => {
+        console.error("Error creating animal:", error);
+      }
+    );
   }
 }

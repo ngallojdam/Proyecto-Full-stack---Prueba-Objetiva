@@ -21,13 +21,16 @@
         <img src="../../assets/animallogo.jpg" alt="logo" /> 
       </ion-avatar>
       <ion-label> <!--El ion-label está en el centro-->
-        <h1>Animals</h1>
-        <p>Oct 20, 2024</p>
+        <h1>{{ animal.title }}</h1>
+        <p>{{animal.date}}</p>
       </ion-label>
+      <ion-button fill="clear" slot="end" (click)="presentPopover ($event, animal)">
+        Más info
+      </ion-button>
       <ion-icon slot="end" name="thumbs-up"></ion-icon> <!--Se coloca en la zona de la derecha al poner "end"-->
     </ion-item>
 
-    <img src="animal.image" alt="animal.title"> <!--La imagen se coloca en la carpeta assets-->
+    <img [src]="animal.image" alt="{{ animal.title }}" /> <!--La imagen se coloca en la carpeta assets-->
 
     <ion-card-header>
       <ion-card-subtitle>{{ animal.subtitle }}</ion-card-subtitle>

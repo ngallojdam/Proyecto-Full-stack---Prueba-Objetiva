@@ -32,17 +32,16 @@ exports.create = (req, res) => {
 };
 
 // Retrieve all Animals from the database
-exports.findAll = (req, res) => {       // Creamos el detalle del controlador para mostrar todas las bicicletas
-    Animal.findAll()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
+exports.findAll = async (req, res) => {       // Creamos el detalle del controlador para mostrar todas las bicicletas
+    try {
+        const animal = await Animal.findAll();
+        res.send(animals);
+        }catch(error) {
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while retrieving animals."
             });
-        });
+        }
 };
 
 // Find a single Animal with an id
