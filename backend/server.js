@@ -24,12 +24,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models");
 
 // For explotation. Database is not dropped.
-// db.sequelize.sync(); 
-
+db.sequelize.sync({ force: false }) // Cambia a `true` solo si quieres sobrescribir tablas
+    .then(() => {
+        console.log("Database synchronized");
+    })
+    .catch((err) => {
+        console.error("Failed to synchronize database:", err);
+    });
 // Development only. Drops and re-sync db everytime the server starts.
-db.sequelize.sync({ force: true }).then(() => {
+/*db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
-});
+});*/
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
 //In all future routes, this helps to know if the request is authenticated or not.
@@ -67,8 +72,46 @@ app.use(function (req, res, next) {
 });
 
 require("./routes/user.routes")(app);
-require("./routes/motorbike.routes")(app);
+require("./routes/animal.routes")(app);
 
 app.listen(port, () => {
   console.log('Server started on: ' + port);
 });
+
+app.post('/api/animals/create', (req, res) => {
+  const { token } = req.headers;
+  if (!token) {
+    return res.status(403).json({ error: 'No token provided'});
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: 'Unauthorized '});
+    }
+  })
+
+  const { gender, race } = req.body;
+
+  if (!gender || !race) {
+    return res.status(400).json({ error: 'Gender and race are required'});
+  }  
+
+  db.animal.create({
+    gender: gender,
+    race: race
+  })
+  .then(animal => {
+    res.status(201).json({
+      message: 'Animal created successfully',
+      animal: animal
+    });
+  })
+  .catch(error => {
+    console.error('Error creating animal:', error);
+    res.status(500).json({
+      error: true,
+      message: 'Error creating animal'
+    });
+  });
+
+ });

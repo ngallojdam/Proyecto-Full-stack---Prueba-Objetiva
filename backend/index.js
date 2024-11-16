@@ -22,7 +22,14 @@ app.use(bodyParser.urlencoded({ extended: true})); // Usar `bodyParser` si neces
 
 // Sincronización con la base de datos
 // Uso normal: Sin eliminar los datos existentes en las tablas
-db.sequelize.sync();
+db.sequelize.sync({ force: true })
+  .then(() => {
+    console.log("Database synchronized (tables recreated)");
+  })
+  .catch((err) => {
+    console.error("Failed to synchronize database:", err);
+  });
+
 
 // Desarrollo: Eliminar tablas existentes y volver a crearlas
     // db.sequelize.sync({ force:true }).then(() => {      // Usando .sync[{force:true}] borrará las tablas existentes y las creará de nuevo

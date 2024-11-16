@@ -19,6 +19,7 @@
     "target": "es2022",
     "module": "es2020",
     "skipLibCheck": true,
+    "types": ["jest", "node"],
     "lib": [
       "es2018", 
       "dom"
