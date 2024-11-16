@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimalService } from '../services/animal.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PhotoService } from '../services/photo.service';
 import { Router } from '@angular/router';
 
@@ -82,31 +82,30 @@ export class AddAnimalPage implements OnInit {
 
     if (!this.animalForm.valid) {
       console.log("Please provide all the required values!");
-      this.animalForm.markAllAsTouched();
       return;
-    }
+    } else {
+      let blob: Blob | null = await this.convertPhotoToBlob();
 
-    let blob: Blob | null = await this.convertPhotoToBlob();
+      // Crear FormData con los datos del formulario
+      const formData = new FormData();
+      formData.append("gender", this.animalForm.value.gender);
+      formData.append("race", this.animalForm.value.race);
 
-    // Crear FormData con los datos del formulario
-    const formData = new FormData();
-    formData.append("gender", this.animalForm.value.gender);
-    formData.append("race", this.animalForm.value.race);
-
-    // Si hay una foto capturada, se adjunta al FormData
-    if (blob) {
-      formData.append("photo", blob, "photo.jpg");
-    }
-
-    // Llamar al servicio para agregar el animal
-    this.animalService.addAnimal(formData).subscribe(
-      (response) => {
-        console.log("Animal created successfully!", response);
-        this.router.navigateByUrl("/my-animals"); // Redirige a la página de animales
-      },
-      (error) => {
-        console.error("Error creating animal:", error);
+      // Si hay una foto capturada, se adjunta al FormData
+      if (blob) {
+        formData.append("file", blob, "animal-photo.jpg");
       }
-    );
+
+      // Llamar al servicio para agregar el animal
+      this.animalService.addAnimal(formData).subscribe(
+        (response) => {
+          console.log("Animal created successfully!", response);
+          this.router.navigateByUrl("/my-animals"); // Redirige a la página de animales
+        },
+        (error) => {
+          console.error("Error creating animal:", error);
+        }
+      );
+    }
   }
 }

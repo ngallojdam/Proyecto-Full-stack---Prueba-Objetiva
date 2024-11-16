@@ -49,3 +49,9 @@ const PORT = process.env.PORT || 8080; // Usa el puerto definido en las variable
 app.listen(PORT, () => {                                
     console.log(`Server is running on port ${PORT}.`);
 });
+
+// Middleware para manejar errores
+app.use((err, req, res, next) => {
+  console.error(err.stack); // Log del error
+  res.status(500).send({ message: "Internal Server Error" });
+});
