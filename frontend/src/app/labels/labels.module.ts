@@ -14,7 +14,7 @@ import { AnimalPopoverComponent } from './animal-popover/animal-popover.componen
     LabelsPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [LabelsPage, AnimalPopoverComponent ],
-  exports: [LabelsPage],
+  declarations: [LabelsPage, AnimalPopoverComponent],
+  exports: [LabelsPage]
 })
 export class LabelsPageModule {}

@@ -8,8 +8,8 @@ export class PhotoService {
 
   constructor() { }
 
+  // Método para tomar una foto
   public async takePhoto(): Promise<Photo> {
-    // Take a photo
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
@@ -19,8 +19,8 @@ export class PhotoService {
     return capturedPhoto;
   }
 
+  // Método para seleccionar una imagen de la galería
   public async pickImage(): Promise<GalleryPhoto> {
-    // Pick an image
     const capturedPhotos = await Camera.pickImages({
       limit: 1,
       quality: 100

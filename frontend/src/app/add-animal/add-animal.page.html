@@ -7,16 +7,25 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">add-animal</ion-title>
+      <ion-title size="large">Add Animal</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-grid>
     <ion-row class="ion-align-items-center">
       <ion-col size="6">
-        <ion-img class="photo-frame" *ngIf="capturedPhoto" [src]="capturedPhoto" (click)="takePhoto()"></ion-img>
-        <ion-img class="photo-frame" *ngIf="!capturedPhoto" src="../../assets/No-Image-Placeholder.svg"
-          (click)="takePhoto()"></ion-img>
+        <ion-img 
+          class="photo-frame" 
+          *ngIf="capturedPhoto" 
+          [src]="capturedPhoto" 
+          (click)="takePhoto()">
+        </ion-img>
+        <ion-img 
+          class="photo-frame" 
+          *ngIf="!capturedPhoto" 
+          src="../../assets/No-Image-Placeholder.svg" 
+          (click)="takePhoto()">
+        </ion-img>
       </ion-col>
       <ion-col size="6">
         <ion-button color="primary" fill="outline" (click)="takePhoto()">
@@ -28,7 +37,7 @@
           Pick an image
         </ion-button>
         <ion-button color="danger" fill="outline" (click)="discardImage()">
-          <ion-icon slot="start" name="aperture"></ion-icon>
+          <ion-icon slot="start" name="trash-outline"></ion-icon>
           Discard image
         </ion-button>
       </ion-col>
@@ -36,20 +45,28 @@
   </ion-grid>
 
   <form [formGroup]="animalForm" (ngSubmit)="submitForm()">
-    <ion-item lines="full">
-      <ion-label position="floating">Gender</ion-label>
+    <ion-item>
+      <ion-label position="stacked">Gender</ion-label>
       <ion-input formControlName="gender" type="text" required></ion-input>
     </ion-item>
-    <span class="error ion-padding" *ngIf="getFormControl('gender')?.hasError('required') && getFormControl('gender')?.touched">Gender required.</span>
+    <ion-text color="danger" *ngIf="getFormControl('gender')?.hasError('required') && getFormControl('gender')?.touched">
+      Gender is required.
+    </ion-text>
+
     <ion-item lines="full">
       <ion-label position="floating">Race</ion-label>
       <ion-input formControlName="race" type="text" required></ion-input>
     </ion-item>
-    <span class="error ion-padding" *ngIf="getFormControl('race')?.hasError('required') && getFormControl('race')?.touched">Race is required.</span>
+    <ion-text color="danger" *ngIf="getFormControl('race')?.hasError('required') && getFormControl('race')?.touched">
+      Race is required.
+    </ion-text>
+
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="primary" expand="block" [disabled]="animalForm.invalid">Submit</ion-button>
+        <ion-button type="submit" color="primary" expand="block" [disabled]="animalForm.invalid">
+          Submit
+        </ion-button>
       </ion-col>
     </ion-row>
-  </form>  
+  </form>
 </ion-content>

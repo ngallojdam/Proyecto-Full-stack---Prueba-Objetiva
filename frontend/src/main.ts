@@ -1,8 +1,17 @@
+import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { defineCustomElements } from '@ionic/pwa-elements/loader';  // se instaló antes npm install @ionic/pwa-elements y npm install @capacitor/camera
 
 import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-import { defineCustomElements } from '@ionic/pwa-elements/loader';  // se instaló antes npm install @ionic/pwa-elements y npm install @capacitor/camera
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .catch((err: any) => console.log(err));
 
 // Call the element loader after the platform has been bootstrapped
 defineCustomElements(window);

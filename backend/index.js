@@ -1,45 +1,44 @@
-const express = require("express"); // importa la librería express
-const bodyParser = require('body-parser');
-const cors = require("cors"); // Devolviendo el permiso CORS desde la API
-const app = express(); // empezamos a usar express usando la constante app
-const db = require('./models');
-var path = require('path'); // Se crea la carpeta backend/public/images y en el backend como carpeta publica 
+const express = require("express"); // Importa la librería express
+const bodyParser = require('body-parser'); // Importa body-parser para procesar datos de formulario
+const cors = require("cors"); // Configuración de permisos CORS desde la API
+const app = express(); // Inicializa la aplicación express
+const db = require('./models'); // Importa los modelos definidos con Sequelize
+var path = require('path'); // Importa path para trabajar con rutas de archivos
 
-
-// public directory
+// Configuración de la carpeta pública para almacenar imágenes
 app.use(express.static(path.join(__dirname, 'public')));
-var corsOptions = {
-    origin: "*"
-};
 
+// Configuración de CORS: Permitir solicitudes desde cualquier origen
+const corsOptions = {
+    origin: "*", // Cambiar "*" por una URL específica para mayor seguridad en producción
+};
 app.use(cors(corsOptions)); // Instalamos el paquete cors y editamos index.js para incluir el permiso para la URL del dominio de origen de nuestro servidor de desarrollo de Ionic
 
-// parse requests of content-type - appplication/json
+// Parseo de solicitudes de tipo application/json
 app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: true}));
+// Parseo de solicitudes de tipo aplication/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true})); // Usar `bodyParser` si necesitas compatibilidad con datos codificados en formularios
 
-// parse requests of content-type - application/x-www-form-urlenconded
-app.use(express.urlencoded({ extended: true }));
-
-// normal use. Doesn't delete the database data
+// Sincronización con la base de datos
+// Uso normal: Sin eliminar los datos existentes en las tablas
 db.sequelize.sync();
 
-// In development, you may need to drop existing tables and re-sync database
-db.sequelize.sync({ force:true }).then(() => {      // Usando .sync[{force:true}] borrará las tablas existentes y las creará de nuevo
-    console.log("Drop and re-sync db.")             
-})
+// Desarrollo: Eliminar tablas existentes y volver a crearlas
+    // db.sequelize.sync({ force:true }).then(() => {      // Usando .sync[{force:true}] borrará las tablas existentes y las creará de nuevo
+        //console.log("Drop and re-sync db.")             
+    //})
 
-// simple route
+// Ruta principal: Punto de entrada de la API
 app.get("/", (req, res) => {                                // <= tenemos un end-point que escucha en http://localhost:8080/
     res.json({ message: "Welcome to animals application." }); // devolverá un mensaje en formato JSON
 });
 
-// Importamos las rutas en index.js
+// Importamos las rutas definidas para animales
 require("./routes/animal.routes")(app);
 
-// set port, listen for requests
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {                                // <= arrancamos la API puerto de escucha 8080
+// Configuración del puerto y puesta en marcha del servidor
+const PORT = process.env.PORT || 8080; // Usa el puerto definido en las variables de entorno o el 8080 por defecto
+app.listen(PORT, () => {                                
     console.log(`Server is running on port ${PORT}.`);
 });

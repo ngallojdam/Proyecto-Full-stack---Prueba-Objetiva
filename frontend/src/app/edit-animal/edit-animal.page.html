@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Animal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="saveAnimal()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="animal.name" name="name" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Especie</ion-label>
+      <ion-input [(ngModel)]="animal.species" name="species" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="full" type="submit" [disabled]="!animal.name || !animal.species">Guardar</ion-button>
+  </form>
+</ion-content>
