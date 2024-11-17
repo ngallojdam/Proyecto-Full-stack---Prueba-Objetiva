@@ -31,9 +31,10 @@ exports.signin = (req, res) => {
       return res.json({ user: userObj, access_token: token });
     })
     .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
+      res.status(500).json({
+        error: true,
+        message: "Error occurred during authentication.",
+        details: err.message
       });
     });
 };
@@ -48,13 +49,15 @@ exports.isAuthenticated = (req, res, next) => {
       message: "Token is required."
     });
   }
+
   // check token that was passed by decoding token using secret
-  // .env should contain a line like JWT_SECRET=V3RY#1MP0RT@NT$3CR3T#
-  jwt.verify(token, process.env.JWT_SECRET, function (err, user) {
-    if (err) return res.status(401).json({
-      error: true,
-      message: "Invalid token."
-    });
+  jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+    if (err) {
+      return res.status(401).json({
+        error: true,
+        message: "Invalid or expired token."
+      });
+    }
 
     User.findByPk(user.id)
       .then(data => {

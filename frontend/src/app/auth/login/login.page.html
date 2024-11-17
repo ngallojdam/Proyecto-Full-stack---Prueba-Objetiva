@@ -1,0 +1,91 @@
+<!--<ion-header>
+    <ion-toolbar>
+      <ion-title>Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input formControlName="username" required></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password" required></ion-input>
+      </ion-item>
+  
+      <ion-button expand="full" type="submit">Login</ion-button>
+    </form>
+  </ion-content>
+-->
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Cambiamos a [formGroup]="loginForm" para formularios reactivos -->
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <ion-grid>
+      <ion-row color="primary" class="ion-justify-content-center">
+        <ion-col size-md="6" size-lg="5" size-xs="12">
+          <div>
+            <h3>Login</h3>
+          </div>
+          <div class="ion-text-center">
+            <!-- Asociamos el campo al FormControl "username" -->
+            <ion-item>
+              <ion-input
+                type="text"
+                formControlName="username"
+                placeholder="Username"
+              ></ion-input>
+            </ion-item>
+            <!-- Asociamos el campo al FormControl "password" -->
+            <ion-item>
+              <ion-input
+                type="password"
+                formControlName="password"
+                placeholder="Password"
+              ></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-text-center">
+            <!-- Deshabilitamos el botón si el formulario es inválido -->
+            <ion-button
+              size="large"
+              type="submit"
+              [disabled]="loginForm.invalid"
+              expand="block"
+            >
+              Login
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div class="ion-text-center">
+            If you don't have an account, please
+            <a routerLink="/register">register</a> first!
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

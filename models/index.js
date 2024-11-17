@@ -8,6 +8,13 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
+const express = require('express');
+const app = express();
+const userRoutes = require('./routes/user.routes');
+const animalRoutes = require('./routes/animal.routes');
+
+app.use('/api/users', userRoutes);
+app.use('/api/animals', animalRoutes);
 
 let sequelize;
 if (config.use_env_variable) {

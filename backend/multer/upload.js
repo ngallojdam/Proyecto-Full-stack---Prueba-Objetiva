@@ -1,21 +1,28 @@
 var multer = require('multer');
 var path = require('path');
+const fs = require('fs');
+
+// Verificar si la carpeta de destino existe, si no, crearla
+const dir = './public/images';
+if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+}
 
 // Configuración de almacenamiento
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './public/images'); // Guardar en 'public/images'
+        cb(null, dir); // Guardar en 'public/images'
     },
     filename: (req, file, cb) => {
         var filetype = '';
         if (file.mimetype === 'image/gif') {
             filetype = 'gif';
-        }
-        if (file.mimetype === 'image/png') {
+        } else if (file.mimetype === 'image/png') {
             filetype = 'png';
-        }
-        if (file.mimetype === 'image/jpeg') {
+        } else if (file.mimetype === 'image/jpeg') {
             filetype = 'jpg';
+        } else {
+            return cb(new Error('Tipo de archivo no válido. Solo se permiten imágenes GIF, PNG y JPG.'));
         }
         cb(null, 'image-' + Date.now() + '.' + filetype); // Nombre único
     }
@@ -23,8 +30,10 @@ var storage = multer.diskStorage({
 
 // Filtro de archivo (para tipos permitidos)
 var fileFilter = (req, file, cb) => {
-    const allowedTypes = ['image/png', 'image/jpeg', 'image/gif'];
-    if (!allowedTypes.includes(file.mimetype)) {
+    const allowedExtensions = ['.png', '.jpeg', '.jpg', '.gif'];
+    const extname = path.extname(file.originalname).toLowerCase();
+    
+    if (!allowedExtensions.includes(extname)) {
         return cb(new Error('Solo se permiten imágenes en formato PNG, JPG o GIF.'));
     }
     cb(null, true);
@@ -38,7 +47,3 @@ var upload = multer({
 });
 
 module.exports = upload;
-
-
-// Lo que hace upload.js es colocar el fichero de imagen subido en la ruta public/images, poniéndole la extensión de imagen adecuada
-// y un nombre que incluya la fecha y hora para hacer su nombre único.

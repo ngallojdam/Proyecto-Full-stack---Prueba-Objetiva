@@ -7,9 +7,11 @@
     "@angular/platform-browser": "^18.2.12",
     "@angular/platform-browser-dynamic": "^18.2.12",
     "@angular/router": "^18.2.12",
+    "@capacitor/app": "^6.0.1",
     "@capacitor/camera": "^6.1.0",
     "@ionic/angular": "^8.4.0",
     "@ionic/pwa-elements": "^3.3.0",
+    "@ionic/storage-angular": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.21.1",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.12",
+    "@ionic/angular-toolkit": "^12.1.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.9.0"
   }

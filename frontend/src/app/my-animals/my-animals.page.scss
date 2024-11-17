@@ -1,24 +1,41 @@
 ion-avatar {
     --border-radius: 4px;
     border: gray solid 1px;
-}
-
-
-ion-col {
+  }
+  
+  ion-col {
     text-align: center;
-}
-
-.photo-frame {
+  }
+  
+  .photo-frame {
     margin: 5vw;
     border: black solid 1px;
     width: 40vw;
     border-radius: .25em;
-}
-
-.error {
+  }
+  
+  .error {
     color: red;
-}
-
-form {
+  }
+  
+  form {
     margin: 5vw;
-}
+  }
+  
+  ion-item {
+    --inner-padding-start: 12px;
+    --inner-padding-end: 12px;
+  }
+  
+  ion-list {
+    margin-top: 20px;
+  }
+  
+  ion-badge {
+    margin-left: 10px;
+  }
+  
+  ion-fab-button {
+    background-color: #3880ff;
+  }
+  
