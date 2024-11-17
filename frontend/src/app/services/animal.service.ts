@@ -11,9 +11,13 @@ export class AnimalService {
   constructor(private httpClient: HttpClient) {}
 
   // Obtener lista de animales
-  getAnimals() {
-    return this.httpClient.get<any>(this.endpoint);
+  getAnimals(token: string): Observable<any> {
+    const headers = { 'Authorization': 'Bearer ' + token };
+    return this.httpClient.get(this.endpoint, { headers });
   }
+  /*getAnimals() {
+    return this.httpClient.get<any>(this.endpoint);
+  }*/
 
   // Agregar un animal
   addAnimal(formData: FormData): Observable<any> {
