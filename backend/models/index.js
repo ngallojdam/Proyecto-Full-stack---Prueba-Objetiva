@@ -1,8 +1,7 @@
-// backend/models/index.js
 const { Sequelize } = require('sequelize');
 const dbConfig = require('../config/db.config');
 
-// Crea la instancia de Sequelize
+// Configuración de Sequelize
 const sequelize = new Sequelize(
   dbConfig.DB,
   dbConfig.USER,
@@ -21,11 +20,9 @@ const sequelize = new Sequelize(
 
 const db = {};
 
-// Importa los modelos
+// Importar modelos
 db.User = require('./user.model.js')(sequelize, Sequelize.DataTypes);
-
-// Agrega otros modelos si los tienes
-db.Animal = require('./animal.model.js')(sequelize, Sequelize.DataTypes);
+db.Animal = require('./animal.model.js')(sequelize, Sequelize.DataTypes); // Nota: db.Animal (mayúscula)
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

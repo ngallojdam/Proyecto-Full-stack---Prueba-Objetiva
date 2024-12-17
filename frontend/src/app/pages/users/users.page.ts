@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
+import { Router } from '@angular/router'; // Importar Router correctamente
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,10 @@ export class UsersPage implements OnInit {
   newUser: User = { id: 0, name: '', email: '', password: '' };  // Cambiar "name" a "username"
 
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router // Inyectar Router
+    ) {}
 
   ngOnInit() {
     this.fetchUsers();
@@ -28,8 +32,14 @@ export class UsersPage implements OnInit {
   // Crear un nuevo usuario
   createUser() {
     this.userService.create(this.newUser).subscribe(() => {
+      // Llamar a fetchUsers para actualizar la lista de usuarios
       this.fetchUsers();
+
+      // Limpiar el formulario
       this.newUser = { id: 0, name: '', email: '', password: '' };
+
+      // Redirigir a la página de inicio después de crear el usuario
+      this.router.navigate(['/home']);  // Redirigir a la página de inicio
     });
   }
 

@@ -19,11 +19,17 @@ const registerUser = async (req, res) => {
       password: hashedPassword,
     });
     const token = jwt.sign({ id: newUser.id, email: newUser.email }, 'your_secret_key', { expiresIn: '1h' });
-    res.status(201).json({ message: 'User registered successfully', token, user: newUser });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error. Please try again later.', error: error.message });
-  }
-};
+    
+    // Enviar la respuesta de éxito
+    res.status(201).json({
+        message: 'User registered successfully',
+        token,
+        user: newUser,
+      });
+    } catch (error) {
+      res.status(500).json({ message: 'Server error. Please try again later.', error: error.message });
+    }
+  };
 
 // Función para autenticar un usuario
 const loginUser = async (req, res) => {

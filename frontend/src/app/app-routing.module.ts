@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UsersPage } from './pages/users/users.page';  // Asegúrate de que sea el componente correcto
+import { HomePage } from './home/home.page';  // Este es tu componente de inicio
 
 const routes: Routes = [
   {
