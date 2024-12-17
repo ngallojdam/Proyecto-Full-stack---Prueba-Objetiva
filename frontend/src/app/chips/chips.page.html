@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- Icono de vuelta a la página principal -->
+      <ion-button (click)="goToHome()">
+        <ion-icon slot="icon-only" name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Glosario de Animales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Chips</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding" [fullscreen]="true">
+    <!-- Imagen central con mosaico de animales -->
+    <div class="central-image-container">
+      <img 
+        src="assets/img/chips/mosaico_animales.jpg" 
+        alt="Mosaico de Animales"
+        (click)="openItemModal()"
+        class="central-image"
+      />
+    </div>
+  </ion-content>

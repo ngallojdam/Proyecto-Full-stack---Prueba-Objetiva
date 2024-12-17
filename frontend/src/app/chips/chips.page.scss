@@ -1,0 +1,52 @@
+ion-card {
+    margin: 10px; /* Espaciado entre las tarjetas */
+    width: 100%; /* Asegura que ocupen el ancho completo */
+  }
+  
+  ion-card img {
+    width: 100%; /* Imagen ocupa todo el ancho del card */
+    height: auto;
+    display: block;
+  }
+  
+  ion-card-content {
+    font-size: 14px; /* Ajusta el tamaño del texto para que se muestre completo */
+    line-height: 1.5; /* Mejora la legibilidad */
+  }
+  
+  ion-content {
+    --background: #f9f9f9; /* Fondo claro para mejorar la apariencia */
+  }
+  
+  ion-avatar img {
+    border-radius: 50%; /* Redondea las imágenes del avatar */
+    object-fit: cover; /* Ajusta la imagen para que encaje */
+  }
+
+  ion-item {
+    cursor: pointer;
+    &.selected {
+      background-color: #d4f4ff; /* Fondo azul claro */
+    }
+  }
+
+  .central-image-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 80vh; /* Ocupa el 80% de la altura de la pantalla */
+  }
+  
+  .central-image {
+    max-width: 100%; /* Asegura que no se desborde horizontalmente */
+    max-height: 100%; /* Asegura que no se desborde verticalmente */
+    border-radius: 8px; /* Bordes redondeados (opcional) */
+    cursor: pointer; /* Cambia el cursor a "pointer" */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra (opcional) */
+    transition: transform 0.2s ease-in-out; /* Efecto de escala */
+  }
+  
+  .central-image:hover {
+    transform: scale(1.05); /* Efecto de zoom al pasar el ratón */
+  }
+  

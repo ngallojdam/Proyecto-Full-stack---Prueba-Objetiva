@@ -1,0 +1,166 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Glosario de animales</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <!-- Lista de tarjetas -->
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../assets/img/chips/Afgano.jpg" alt="afgano" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Afgano</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Afgano es un perro de aspecto noble que luce con orgullo y elegancia su largo y brillante pelaje.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../assets/img/chips/Labrador-Retriever.jpg" alt="labrador" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Labrador Retriever</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Labrador Retriever es un perro amigable, inteligente y activo, ideal para la familia.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Poodle.jpg" alt="poodle" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Poodle</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Poodle es un perro elegante y inteligente que destaca por su pelaje rizado.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Beagle.jpg" alt="beagle" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Beagle</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Beagle es un perro de caza con un agudo sentido del olfato y una naturaleza amistosa.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Bulldog.jpg" alt="bulldog" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Bulldog Inglés</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Bulldog Inglés es un perro robusto y de carácter tranquilo, ideal para la vida en apartamento.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Pomerania.jpg" alt="pomerania" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Pomerania</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Pomerania es un perro pequeño y peludo, conocido por su personalidad vivaz y su apariencia de peluche.
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Doberman.jpg" alt="doberman" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Doberman</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Doberman es un perro guardián y de trabajo, conocido por su lealtad y coraje.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Rottweiler.jpg" alt="rottweiler" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Rottweiler</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Rottweiler es un perro robusto y protector, ideal para la seguridad de la familia.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+
+      
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Golden-Retriever.jpg" alt="golden retriever" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Golden Retriever</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Golden Retriever es un perro amable y sociable, muy popular por su excelente temperamento.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+ 
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/img/chips/Chihuahua.jpg" alt="chihuahua" />
+        </ion-avatar>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Chihuahua</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>El Chihuahua es un perro de raza pequeña, conocido por su valentía y personalidad extrovertida.</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-item>
+      
+       
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="onIonInfinite($event)" [disabled]="isInfiniteDisabled">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más ítems...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+  </div>
+</ion-content>

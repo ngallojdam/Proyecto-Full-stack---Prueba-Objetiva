@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <h1 style="text-align: center;">Daniela's Animals website</h1>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="image-container">
+    <img src="https://png.pngtree.com/background/20230612/original/pngtree-many-animals-standing-together-for-a-photograph-picture-image_3178861.jpg" alt="animales">
+  </div>
+  
+<!--Creamos un botón para pasar de una página a otra-->
+
+<ion-button expand="block" (click)="gotoMyAnimals()">Show animals</ion-button>
+<ion-button expand="block" (click)="gotoChips()">Show chips</ion-button>
+
+<!-- Enlace al apartado de registro de usuarios -->
+<ion-button routerLink="/users" expand="full">
+  Ir al Registro de Usuarios
+</ion-button>
+
+<!--Creamos el pie de página-->
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="custom-title">
+      © Daniela's Animals website
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+
+</ion-content>
