@@ -1,6 +1,7 @@
 # Full Stack Project by Nicasio Manuel Galindo Lojo
 
-Animals
+![image](https://github.com/user-attachments/assets/2f13286b-5869-407e-bf61-1952f9604631)
+
 
 # Full stack example with Ionic + Express+ Sequelize + MySQL
 
