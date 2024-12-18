@@ -1,15 +1,21 @@
+// backend/index.js
+require('dotenv').config();
+
 const express = require("express"); // Importa la librería express
 const app = express(); // Creamos la aplicación de Express
 const cors = require("cors"); // Para habilitar CORS
 const bodyParser = require("body-parser");
 const userRoutes = require("./routes/user.routes"); // Importamos las rutas de usuario
+const authRoutes = require("./routes/auth.routes"); // Importa las rutas de autenticación
 
 // Opciones de CORS para permitir la solicitud desde Ionic
-var corsOptions = {
-  origin: "http://localhost:8100",
-};
+//var corsOptions = {
+ // origin: "http://localhost:8100",
+//};
+//app.use(cors(corsOptions)); // Aplicamos las opciones de CORS para permitir solicitudes desde Ionic
 
-app.use(cors(corsOptions)); // Aplicamos las opciones de CORS para permitir solicitudes desde Ionic
+// Usar CORS para habilitar solicitudes desde cualquier origen
+app.use(cors());
 
 // Middleware para parsear las solicitudes en formato JSON
 app.use(express.json());
@@ -28,15 +34,17 @@ db.sequelize
     console.log("Error al sincronizar la base de datos: " + err.message);
   });
 
-// Ruta simple de bienvenida
+  
+
+// Rutas de bienvenida y de usuarios
 app.get("/", (req, res) => {
-  res.json({ message: "Bienvenido a la aplicación de animales." });
+  res.json({ message: "Bienvenido a la aplicación." });
 });
 
-// Importamos las rutas de animales
-require("./routes/animal.routes")(app);
+// Rutas de autenticación
+app.use("/api", authRoutes);  // Ruta para el login
 
-// Usamos las rutas de usuarios (sin duplicar)
+// Rutas de usuarios
 app.use("/api/users", userRoutes);
 
 // Manejador de errores genérico
@@ -50,3 +58,6 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`El servidor está corriendo en el puerto ${PORT}.`);
 });
+
+// Importamos las rutas de animales
+require("./routes/animal.routes")(app);

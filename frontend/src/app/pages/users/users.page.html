@@ -1,12 +1,24 @@
 <ion-header>
   <ion-icon name="person-outline"></ion-icon>    
   <ion-toolbar>
-    <ion-title>Registro de Usuarios</ion-title>
+    <ion-title>Gestión de Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!-- Formulario para Crear Nuevo Usuario -->
+<ion-content *ngIf="isLoggedIn; else loginForm">
+  <!-- Lista de usuarios si está logueado -->
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-label>
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.email }}</p>
+      </ion-label>
+      <ion-button fill="outline" (click)="updateUser(user)">Editar</ion-button>
+      <ion-button color="danger" (click)="confirmDelete(user.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <!-- Formulario para Crear Nuevo Usuario (Visible solo si está logueado) -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Añadir Nuevo Usuario</ion-card-title>
@@ -14,7 +26,7 @@
     <ion-card-content>
       <ion-item>
         <ion-label position="stacked">Nombre</ion-label>
-        <ion-input [(ngModel)]="newUser.name" placeholder="Ej: Juan Pérez"></ion-input>
+        <ion-input [(ngModel)]="newUser.name" placeholder="Ej: Juan Pérez" required></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Email</ion-label>
@@ -25,23 +37,32 @@
         <ion-input [(ngModel)]="newUser.password" type="password"></ion-input>
       </ion-item>
       <ion-button expand="block" (click)="createUser()">Registrar</ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <!-- Lista de Usuarios -->
-  <ion-list>
-    <ion-item *ngFor="let user of users">
-      <ion-label>
-        <h2>{{ user.name }}</h2>
-        <p>{{ user.email }}</p>
-      </ion-label>
-      <ion-button slot="end" color="danger" (click)="deleteUser(user.id)">
-        Eliminar
-      </ion-button>
-    </ion-item>
-  </ion-list>
-
-
-<!-- Botón para volver a la página de inicio (home) -->
-<ion-button expand="block" routerLink="/home">Volver a Inicio</ion-button>
+    </ion-card-content> <!-- Cierre correcto de ion-card-content -->
+  </ion-card> <!-- Cierre correcto de ion-card -->
 </ion-content>
+
+<ng-template #loginForm>
+  <ion-text>
+    <p>Debes iniciar sesión para gestionar los usuarios.</p>
+    <!-- Formulario de Login -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Iniciar Sesión</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="stacked">Correo electrónico</ion-label>
+          <ion-input [(ngModel)]="loginData.email" placeholder="Ej: juan@example.com" type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Contraseña</ion-label>
+          <ion-input [(ngModel)]="loginData.password" placeholder="Contraseña" type="password"></ion-input>
+        </ion-item>
+        <ion-button expand="block" (click)="login()">Iniciar Sesión</ion-button> <!-- Cierre correcto de ion-button -->
+        <ion-text color="danger" *ngIf="loginError">
+          <p>{{ loginError }}</p>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-text>
+</ng-template>
