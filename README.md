@@ -7,8 +7,7 @@
 
 As the header says, a project with Ionic, Express, Sequelize and MySQL based on the notes of Tiburcio Cruz is just that.
 
-Initially appeared on
-[gist](https://github.com/ngallojdam/AnimalsIonicExpressSequelize). But the page cannot open anymore so that is why I have moved it here.
+(https://github.com/ngallojdam/Proyecto-Full-stack---Prueba-Objetiva/tree/main)
 
 ## Getting Started
 
